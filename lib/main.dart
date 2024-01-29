@@ -10,19 +10,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: FirstPage(),
+      home: FirstView(),
     );
   }
 }
 
-class FirstPage extends StatefulWidget {
-  const FirstPage({super.key});
+class FirstView extends StatefulWidget {
+  const FirstView({super.key});
 
   @override
-  State<FirstPage> createState() => _FirstPageState();
+  State<FirstView> createState() => _FirstViewState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _FirstViewState extends State<FirstView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
