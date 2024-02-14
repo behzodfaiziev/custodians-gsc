@@ -29,14 +29,8 @@ class ProfileBody extends StatelessWidget {
               ),
               Column(
                 children: [
-                  Text(
-                    "${user.name}",
-                    style: TextBigStyle()
-                  ),
-                  Text(
-                    "${user.bio}",
-                    style: TextSmallStyle()
-                  )
+                  Text("${user.name}", style: TextBigStyle()),
+                  Text("${user.bio}", style: TextSmallStyle())
                 ],
               ),
               IconButton(
@@ -55,77 +49,124 @@ class ProfileBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text("Participated\nEvents:\n${user.participatedEvents}",
-                  textAlign: TextAlign.center,
-                  style: TextBigStyle()
-                ),
-                const Text("Ranking: 158/2000")
+                    textAlign: TextAlign.center, style: TextBigStyle()),
+                Text("Ranking: ${user.ranking}")
               ],
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("LeaderBoard:",style: TextSmallStyle(),),
-                Text("#1 Izzettin Karasayar"),
-                Text("#2 Celal Yeldus"),
-                Text("#3 Lachin Talaei")
+                Text(
+                  "LeaderBoard:",
+                  style: TextSmallStyle(),
+                ),
+                Text("#1 ${user.leaders![0]}"),
+                Text("#2 ${user.leaders![1]}"),
+                Text("#3 ${user.leaders![2]}")
               ],
             )
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 50),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 50),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("DashBoard",style: TextSmallStyle(),),
+              Text(
+                "DashBoard",
+                style: TextSmallStyle(),
+              ),
               GestureDetector(
-                onTap: (){
-                  print("calisiim");
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
+                onTap: () {},
+                child: Container(
+                  color: ThemeData.light().canvasColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.green,
+                        ),
+                        padding: EdgeInsets.all(8),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        child: const Icon(Icons.sports_handball),
                       ),
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: const Icon(Icons.sports_handball),
-                    ),
-                    const Text("Participated Events",
-                        style: TextStyle(
-                          fontSize: 16
-                        ),),
-                    const Icon(Icons.chevron_right,color: Colors.grey,size: 30,)
-                  ],
+                      const Text(
+                        "Participated Events",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const Icon(
+                        Icons.chevron_right,
+                        color: Colors.grey,
+                        size: 30,
+                      )
+                    ],
+                  ),
                 ),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   print("calisiim");
                 },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.green,
+                child: Container(
+                  color: ThemeData.light().canvasColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.yellow[600],
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.fromLTRB(10, 5, 10, 15),
+                        child: const Icon(Icons.workspace_premium_outlined),
                       ),
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: const Icon(Icons.sports_handball),
-                    ),
-                    const Text("Participated Events",
-                      style: TextStyle(
-                          fontSize: 16
-                      ),),
-                    const Icon(Icons.chevron_right,color: Colors.grey,size: 30,)
-                  ],
+                      const Text(
+                        "Achievements",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const Icon(
+                        Icons.chevron_right,
+                        color: Colors.grey,
+                        size: 30,
+                      )
+                    ],
+                  ),
                 ),
               )
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "My account",
+                style: TextSmallStyle(),
+              ),
+              TextButton(
+                  onPressed: () {
+
+                  },
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                      alignment: Alignment.centerLeft
+                  ),
+                  child: const Text(
+                    "Log Out",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+                  ))
             ],
           ),
         )
@@ -134,11 +175,11 @@ class ProfileBody extends StatelessWidget {
   }
 }
 
-
 class TextSmallStyle extends TextStyle {
   @override
   // TODO: implement fontSize
   double? get fontSize => 12;
+
   @override
   // TODO: implement color
   Color? get color => Colors.grey;
@@ -148,7 +189,9 @@ class TextBigStyle extends TextStyle {
   @override
   // TODO: implement fontSize
   double? get fontSize => 20;
+
   @override
   // TODO: implement fontWeight
   FontWeight? get fontWeight => FontWeight.w600;
 }
+
