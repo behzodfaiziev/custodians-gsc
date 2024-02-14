@@ -1,7 +1,7 @@
 import 'package:custodians/product/init/theme/light_theme.dart';
 import 'package:flutter/material.dart';
 
-import 'features/_main/view/main_view.dart';
+import 'features/auth/views/sign_in_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: LightTheme().theme,
-      home: const MainView(),
+      home: const SignInView(),
     );
   }
 }
