@@ -40,17 +40,17 @@ class _ProfileViewState extends State<ProfileView> {
   }
 
   BaseAppBar get appBar {
-    return BaseAppBar(
+    return const BaseAppBar(
       title: 'Profile',
-      actions: [
-        IconButton(
-          icon: const Icon(
-            Icons.settings,
-            color: Colors.white,
-          ),
-          onPressed: () {},
-        )
-      ],
+      // actions: [
+      //   IconButton(
+      //     icon: const Icon(
+      //       Icons.settings,
+      //       color: Colors.white,
+      //     ),
+      //     onPressed: () {},
+      //   )
+      // ],
     );
   }
 }
