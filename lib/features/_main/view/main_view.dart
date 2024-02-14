@@ -19,13 +19,25 @@ class _MainViewState extends State<MainView> with MainViewMixin {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _views.elementAt(_selectedIndex),
-        bottomNavigationBar: BottomNavigationBar(
-          items: items,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                spreadRadius: 0,
+                blurRadius: 10,
+                offset: const Offset(0, -1),
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            items: items,
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            type: BottomNavigationBarType.fixed,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+          ),
         ));
   }
 }

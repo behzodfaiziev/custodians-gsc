@@ -2,7 +2,7 @@ part of 'main_view.dart';
 
 mixin MainViewMixin on State<MainView> {
   int _selectedIndex = 0;
-    final List<Widget> _views = <Widget>[
+  final List<Widget> _views = <Widget>[
     const FeedView(),
     const SearchView(),
     const MapsView(),
@@ -17,20 +17,32 @@ mixin MainViewMixin on State<MainView> {
 
   List<BottomNavigationBarItem> get items {
     return [
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.home_filled),
+      BottomNavigationBarItem(
+        icon: Icon(
+          _selectedIndex == 0 ? Icons.home_filled : Icons.home_outlined,
+          size: _selectedIndex == 0 ? 28 : 24,
+        ),
         label: 'Home',
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.search),
+      BottomNavigationBarItem(
+        icon: Icon(
+          _selectedIndex == 1 ? Icons.search : Icons.search_outlined,
+          size: _selectedIndex == 1 ? 28 : 24,
+        ),
         label: 'Search',
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.location_on_outlined),
+      BottomNavigationBarItem(
+        icon: Icon(
+          _selectedIndex == 2 ? Icons.location_on : Icons.location_on_outlined,
+          size: _selectedIndex == 2 ? 28 : 24,
+        ),
         label: 'Maps',
       ),
-      const BottomNavigationBarItem(
-        icon: Icon(Icons.person),
+      BottomNavigationBarItem(
+        icon: Icon(
+          _selectedIndex == 3 ? Icons.person : Icons.person_outline,
+          size: _selectedIndex == 3 ? 28 : 24,
+        ),
         label: 'Profile',
       ),
     ];
