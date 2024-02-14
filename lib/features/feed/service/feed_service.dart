@@ -2,7 +2,7 @@ import '../../../product/models/report/report_model.dart';
 
 class FeedService {
   Future<List<ReportModel>> getReports() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     return [
       ReportModel(
         id: '1',

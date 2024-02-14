@@ -1,18 +1,18 @@
 class ReportModel {
   ReportModel({
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-    required this.location,
-    required this.date,
-    required this.time,
-    required this.status,
-    required this.createdBy,
-    required this.createdDate,
-    required this.requiredPeople,
-    required this.currentPeople,
-    required this.isEnded,
+    this.id,
+    this.title,
+    this.description,
+    this.imageUrl,
+    this.location,
+    this.date,
+    this.time,
+    this.status,
+    this.createdBy,
+    this.createdDate,
+    this.requiredPeople,
+    this.currentPeople,
+    this.isEnded,
   });
 
   final String? id;
@@ -29,7 +29,7 @@ class ReportModel {
   final int? currentPeople;
   final bool? isEnded;
 
-  ReportModel fromJson(Map<String, dynamic> json) {
+  factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
       id: json['id'] as String,
       title: json['title'] as String,
