@@ -16,12 +16,14 @@ class ReportTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(report.imageUrl ?? ''),
+      child: Container(height: 200,color: Colors.amber,margin: EdgeInsets.all(8),//ui burada duzenle
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage(report.imageUrl ?? ''),
+          ),
+          title: Text(report.title ?? ''),
+          subtitle: Text(report.location ?? ''),
         ),
-        title: Text(report.title ?? ''),
-        subtitle: Text(report.location ?? ''),
       ),
     );
   }

@@ -40,7 +40,7 @@ class FeedService {
         description: 'Description 3',
         location: 'USA, New York',
         date: DateTime.now().toIso8601String(),
-        imageUrl: 'https://picsum.photos/200/300',
+        imageUrl: 'https://picsum.photos/200/300',// istedigin resim eklenebilir
         createdBy: 'User 3',
         createdDate: DateTime.now().toIso8601String(),
         currentPeople: 3,
