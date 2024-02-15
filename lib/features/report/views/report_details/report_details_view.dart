@@ -12,9 +12,7 @@ class ReportDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBar(title: report.title ?? ""),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
@@ -79,7 +77,7 @@ class ReportDetailsView extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.person,
                       color: Colors.black,
                       size: 30,
@@ -93,7 +91,26 @@ class ReportDetailsView extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+              onPressed: (){},
+              style: ElevatedButton.styleFrom(
+                elevation: 5,
+                minimumSize: Size(0, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text("Join",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
