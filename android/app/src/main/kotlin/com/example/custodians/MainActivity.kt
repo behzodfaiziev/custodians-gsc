@@ -1,4 +1,4 @@
-package com.gdsc-ytu.custodians
+package com.gdsc_ytu.custodians
 
 import io.flutter.embedding.android.FlutterActivity
 
