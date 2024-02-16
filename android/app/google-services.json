@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "186767545048",
+    "project_id": "custodians-gsc",
+    "storage_bucket": "custodians-gsc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186767545048:android:ced79e5b30ff56d9cfbdad",
+        "android_client_info": {
+          "package_name": "com.gdsc_ytu.custodians"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvzzZXWGIbtpOix8NchHLVBvbCtWPmgBA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

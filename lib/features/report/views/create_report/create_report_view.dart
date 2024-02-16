@@ -1,5 +1,13 @@
+import 'dart:io';
+
 import 'package:custodians/core/widgets/app_bar/base_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../../product/components/maps/app_maps.dart';
+import '../../../../product/components/picker/file_picker_button.dart';
+
+part 'create_report_view_mixin.dart';
 
 class CreateReportView extends StatefulWidget {
   const CreateReportView({Key? key}) : super(key: key);
@@ -8,15 +16,8 @@ class CreateReportView extends StatefulWidget {
   State<CreateReportView> createState() => _CreateReportViewState();
 }
 
-class _CreateReportViewState extends State<CreateReportView> {
-  TextEditingController eventName = TextEditingController();
-  TextEditingController description = TextEditingController();
-  TextEditingController date = TextEditingController();
-  TextEditingController time = TextEditingController();
-  TextEditingController peopleNeeded = TextEditingController();
-
-  bool organizedButtonEnabled = false;
-  bool professionalsButtonEnabled = false;
+class _CreateReportViewState extends State<CreateReportView>
+    with CreateReportViewMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,21 +25,30 @@ class _CreateReportViewState extends State<CreateReportView> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.only(top: 32, left: 24, bottom: 12),
             child: Text(
               'Location',
               style: TextBigStyle(),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              child: Image.network(
-                "https://picsum.photos/200/300",
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey[600]!, width: 1.0),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: AppMaps(
+                markers: selectedMarker,
+                onMapTapped: (LatLng latLng) {
+                  setState(() {
+                    selectedMarker.add(Marker(
+                      markerId: const MarkerId('Selected location'),
+                      position: latLng,
+                    ));
+                  });
+                },
               ),
             ),
           ),
@@ -49,41 +59,35 @@ class _CreateReportViewState extends State<CreateReportView> {
               style: TextBigStyle(),
             ),
           ),
+          if (image != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24) +
+                  const EdgeInsets.only(bottom: 20),
+              child: Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: FileImage(image!),
+                    fit: BoxFit.fitWidth,
+                  ),
+                  border: Border.all(color: Colors.grey[600]!, width: 1.0),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black26,
-                    elevation: 0,
-                    minimumSize: const Size(120, 80),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Column(
-                    children: [
-                      Icon(Icons.camera_alt_outlined,color: Colors.black,),
-                      Text("Take Picture",style: TextStyle(color: Colors.black),),
-                    ],
-                  )),
-              ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    backgroundColor: Colors.black26,
-                    minimumSize: const Size(120, 80),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Column(
-                    children: [
-                      Icon(Icons.image_outlined,color: Colors.black,),
-                      Text("Upload Image",style: TextStyle(color: Colors.black),),
-                    ],
-                  ))
+              FilePickerButton(
+                onPressed: () {},
+                text: 'Take Picture',
+                icon: Icons.camera_alt_outlined,
+              ),
+              FilePickerButton(
+                onPressed: () {},
+                text: 'Choose Picture',
+                icon: Icons.photo_outlined,
+              ),
             ],
           ),
           Container(
@@ -134,15 +138,15 @@ class _CreateReportViewState extends State<CreateReportView> {
                 IconButton(
                     onPressed: () {
                       setState(() {
-                        organizedButtonEnabled ?
-                        organizedButtonEnabled = false :
-                        organizedButtonEnabled = true;
+                        organizedButtonEnabled
+                            ? organizedButtonEnabled = false
+                            : organizedButtonEnabled = true;
                       });
                     },
                     icon: Icon(
-                      organizedButtonEnabled ?
-                      Icons.check_box_outlined :
-                      Icons.check_box_outline_blank,
+                      organizedButtonEnabled
+                          ? Icons.check_box_outlined
+                          : Icons.check_box_outline_blank,
                       color: Colors.black,
                       size: 30,
                     ))
@@ -160,15 +164,15 @@ class _CreateReportViewState extends State<CreateReportView> {
                 IconButton(
                     onPressed: () {
                       setState(() {
-                        professionalsButtonEnabled ?
-                        professionalsButtonEnabled = false :
-                        professionalsButtonEnabled = true;
+                        professionalsButtonEnabled
+                            ? professionalsButtonEnabled = false
+                            : professionalsButtonEnabled = true;
                       });
                     },
                     icon: Icon(
-                      professionalsButtonEnabled ?
-                      Icons.check_box_outlined :
-                      Icons.check_box_outline_blank,
+                      professionalsButtonEnabled
+                          ? Icons.check_box_outlined
+                          : Icons.check_box_outline_blank,
                       color: Colors.black,
                       size: 30,
                     ))
@@ -203,11 +207,8 @@ class _CreateReportViewState extends State<CreateReportView> {
 
 class TextBigStyle extends TextStyle {
   @override
-  // TODO: implement fontSize
-  double? get fontSize => 18;
+  double? get fontSize => 16;
 
   @override
-  // TODO: implement fontWeight
   FontWeight? get fontWeight => FontWeight.w600;
 }
-
