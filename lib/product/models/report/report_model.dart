@@ -13,6 +13,8 @@ class ReportModel {
     this.requiredPeople,
     this.currentPeople,
     this.isEnded,
+    this.latitude,
+    this.longitude,
   });
 
   final String? id;
@@ -28,6 +30,8 @@ class ReportModel {
   final int? requiredPeople;
   final int? currentPeople;
   final bool? isEnded;
+  final double? latitude;
+  final double? longitude;
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
@@ -44,6 +48,8 @@ class ReportModel {
       requiredPeople: json['requiredPeople'] as int,
       currentPeople: json['currentPeople'] as int,
       isEnded: json['isEnded'] as bool,
+      latitude: json['latitude'] as double,
+      longitude: json['longitude'] as double,
     );
   }
 
@@ -62,6 +68,8 @@ class ReportModel {
       'requiredPeople': requiredPeople,
       'currentPeople': currentPeople,
       'isEnded': isEnded,
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 }

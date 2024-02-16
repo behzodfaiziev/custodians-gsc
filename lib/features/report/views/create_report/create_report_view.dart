@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:custodians/core/widgets/app_bar/base_app_bar.dart';
+import 'package:custodians/features/report/controller/create_report_controller.dart';
+import 'package:custodians/product/models/report/report_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../product/components/maps/app_maps.dart';
 import '../../../../product/components/picker/file_picker_button.dart';
@@ -52,39 +55,55 @@ class _CreateReportViewState extends State<CreateReportView>
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Text(
-              'Upload Image',
-              style: TextBigStyle(),
+          if (image == null)
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                'Upload Image',
+                style: TextBigStyle(),
+              ),
             ),
-          ),
           if (image != null)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24) +
                   const EdgeInsets.only(bottom: 20),
               child: Container(
-                height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: FileImage(image!),
-                    fit: BoxFit.fitWidth,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey[600]!, width: 1.0),
+                    borderRadius: BorderRadius.circular(4),
                   ),
-                  border: Border.all(color: Colors.grey[600]!, width: 1.0),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
+                  child: Image.file(
+                    File(image!.path),
+                    fit: BoxFit.fitWidth,
+                  )),
             ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               FilePickerButton(
-                onPressed: () {},
+                onPressed: () {
+                  ImagePicker()
+                      .pickImage(source: ImageSource.camera)
+                      .then((value) {
+                    setState(() {
+                      image = value;
+                    });
+                  });
+                },
                 text: 'Take Picture',
                 icon: Icons.camera_alt_outlined,
               ),
               FilePickerButton(
-                onPressed: () {},
+                onPressed: () {
+                  ImagePicker()
+                      .pickImage(source: ImageSource.gallery)
+                      .then((value) {
+                    setState(() {
+                      image = value;
+                    });
+                  });
+                },
                 text: 'Choose Picture',
                 icon: Icons.photo_outlined,
               ),
@@ -98,32 +117,46 @@ class _CreateReportViewState extends State<CreateReportView>
                   controller: eventName,
                   decoration: const InputDecoration(
                     hintText: "Event Name",
+                    hintStyle: TextStyle(fontWeight: FontWeight.w400),
                   ),
                 ),
                 TextField(
                   controller: description,
                   decoration: const InputDecoration(
                     hintText: "Description",
+                    hintStyle: TextStyle(fontWeight: FontWeight.w400),
                   ),
                 ),
+
+                TextField(
+                  controller: location,
+                  decoration: const InputDecoration(
+                    hintText: "Location",
+                    hintStyle: TextStyle(fontWeight: FontWeight.w400),
+                  ),),
                 TextField(
                   controller: date,
                   decoration: const InputDecoration(
                     hintText: "Date",
+                    hintStyle: TextStyle(fontWeight: FontWeight.w400),
                   ),
                 ),
                 TextField(
                   controller: time,
                   decoration: const InputDecoration(
                     hintText: "Time",
+                    hintStyle: TextStyle(fontWeight: FontWeight.w400),
                   ),
                 ),
                 TextField(
                   controller: peopleNeeded,
+                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     hintText: "People Needed",
+                    hintStyle: TextStyle(fontWeight: FontWeight.w400),
                   ),
                 ),
+
               ],
             ),
           ),
@@ -182,7 +215,9 @@ class _CreateReportViewState extends State<CreateReportView>
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                submitReport();
+              },
               style: ElevatedButton.styleFrom(
                 elevation: 5,
                 minimumSize: Size(0, 40),

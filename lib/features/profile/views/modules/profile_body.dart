@@ -177,21 +177,17 @@ class ProfileBody extends StatelessWidget {
 
 class TextSmallStyle extends TextStyle {
   @override
-  // TODO: implement fontSize
   double? get fontSize => 12;
 
   @override
-  // TODO: implement color
   Color? get color => Colors.grey;
 }
 
 class TextBigStyle extends TextStyle {
   @override
-  // TODO: implement fontSize
   double? get fontSize => 20;
 
   @override
-  // TODO: implement fontWeight
   FontWeight? get fontWeight => FontWeight.w600;
 }
 
