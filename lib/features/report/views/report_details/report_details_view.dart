@@ -10,8 +10,109 @@ class ReportDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: BaseAppBar(title: report.title??''),//ozellikleri buradan gonder 
+    return Scaffold(
+      appBar: BaseAppBar(title: report.title ?? ""),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              child: Image.network(
+                report.imageUrl ?? "",
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Container(
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Text(report.description ?? "")),
+          if (report.imageUrl != null)
+            (Padding(
+                padding: EdgeInsets.all(20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  child: Image.network(
+                    report.imageUrl ?? "",
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ))),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            height: 90,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.access_time,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    Text(
+                      "  ${report.createdDate}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    Text(
+                      "  ${report.location}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.person,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    Text(
+                      "  ${report.createdBy}",
+                      style: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: ElevatedButton(
+              onPressed: (){},
+              style: ElevatedButton.styleFrom(
+                elevation: 5,
+                minimumSize: Size(0, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text("Join",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
