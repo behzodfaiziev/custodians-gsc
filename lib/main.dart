@@ -1,10 +1,15 @@
 import 'package:custodians/product/init/theme/light_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'features/_main/view/main_view.dart';
-import 'features/report/views/create_report/create_report_view.dart';
+import 'features/auth/views/auth_checker.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: LightTheme().theme,
-      home: const MainView(),
+      home: const AuthChecker(),
     );
   }
 }

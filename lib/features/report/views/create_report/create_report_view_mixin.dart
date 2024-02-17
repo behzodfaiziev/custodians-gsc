@@ -6,7 +6,7 @@ mixin CreateReportViewMixin on State<CreateReportView> {
 
   Set<Marker> selectedMarker = <Marker>{};
   XFile? image;
-
+  bool isLoading = false;
   final TextEditingController eventName = TextEditingController();
   final TextEditingController description = TextEditingController();
   final TextEditingController date = TextEditingController();
@@ -16,6 +16,11 @@ mixin CreateReportViewMixin on State<CreateReportView> {
 
   bool organizedButtonEnabled = false;
   bool professionalsButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -29,13 +34,19 @@ mixin CreateReportViewMixin on State<CreateReportView> {
   }
 
   Future<void> submitReport() async {
-
     if (selectedMarker.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Please select a location")),
       );
       return;
     }
+
+    // if (image == null) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(content: Text("Please select an image")),
+    //   );
+    //   return;
+    // }
     if (eventName.text.isEmpty ||
         description.text.isEmpty ||
         date.text.isEmpty ||
@@ -47,6 +58,13 @@ mixin CreateReportViewMixin on State<CreateReportView> {
       );
       return;
     }
+
+    setState(() {
+      isLoading = true;
+    });
+
+    final url = await _createReportController.uploadImage(File(image!.path));
+
     final report = ReportModel(
       title: eventName.text,
       description: description.text,
@@ -54,16 +72,26 @@ mixin CreateReportViewMixin on State<CreateReportView> {
       requiredPeople: int.parse(peopleNeeded.text),
       date: date.text,
       time: time.text,
-      location: selectedMarker.first.position.toString(),
-      imageUrl: image?.path ?? "",
+      location: location.text,
+      imageUrl: url,
       isEnded: false,
       currentPeople: 0,
       createdDate: DateTime.now().toString(),
       createdBy: "Anonymous user",
       latitude: selectedMarker.first.position.latitude,
       longitude: selectedMarker.first.position.longitude,
+      participants: <String>[],
     );
-    await _createReportController.createReport(report);
-    if (context.mounted) Navigator.pop(context);
+    final bool isSuccess = await _createReportController.createReport(report);
+    if (context.mounted && isSuccess) {
+      context.pushReplaceAll(const MainView());
+    } else if (context.mounted && !isSuccess) {
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("An error occurred")),
+      );
+    }
   }
 }

@@ -3,25 +3,28 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AppMaps extends StatefulWidget {
   const AppMaps({
-    super.key,
-    required this.onMapTapped,
+    this.onMapTapped,
     this.markers,
+    this.initialPosition,
+    super.key,
   });
 
-  final void Function(LatLng) onMapTapped;
+  final CameraPosition? initialPosition;
+  final void Function(LatLng)? onMapTapped;
   final Set<Marker>? markers;
+
   @override
   State<AppMaps> createState() => _AppMapsState();
 }
 
 class _AppMapsState extends State<AppMaps> {
-  CameraPosition get initialPosition =>
+  CameraPosition get _initialPosition =>
       const CameraPosition(target: LatLng(41.025886, 28.889445), zoom: 17);
 
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      initialCameraPosition: initialPosition,
+      initialCameraPosition: widget.initialPosition ?? _initialPosition,
       onTap: widget.onMapTapped,
       buildingsEnabled: false,
       compassEnabled: true,

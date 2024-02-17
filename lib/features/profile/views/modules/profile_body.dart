@@ -1,11 +1,16 @@
+import 'package:custodians/core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../product/models/user/user_model.dart';
+import '../../../auth/views/auth_checker.dart';
+import '../../controller/profile_controller.dart';
 
 class ProfileBody extends StatelessWidget {
-  const ProfileBody({super.key, required this.user});
+  const ProfileBody(
+      {super.key, required this.user, required this.profileController});
 
   final UserModel user;
+  final ProfileController profileController;
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +93,9 @@ class ProfileBody extends StatelessWidget {
                           shape: BoxShape.circle,
                           color: Colors.green,
                         ),
-                        padding: EdgeInsets.all(8),
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        padding: const EdgeInsets.all(8),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 15),
                         child: const Icon(Icons.sports_handball),
                       ),
                       const Text(
@@ -107,9 +112,7 @@ class ProfileBody extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  print("calisiim");
-                },
+                onTap: () {},
                 child: Container(
                   color: ThemeData.light().canvasColor,
                   child: Row(
@@ -140,7 +143,7 @@ class ProfileBody extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Padding(
@@ -153,20 +156,20 @@ class ProfileBody extends StatelessWidget {
                 style: TextSmallStyle(),
               ),
               TextButton(
-                  onPressed: () {
-
-                  },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                      alignment: Alignment.centerLeft
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero, alignment: Alignment.centerLeft),
+                onPressed: () {
+                  profileController.signOut();
+                  context.pushReplaceAll(const AuthChecker());
+                },
+                child: const Text(
+                  "Log Out",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16,
                   ),
-                  child: const Text(
-                    "Log Out",
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 16,
-                    ),
-                  ))
+                ),
+              )
             ],
           ),
         )
@@ -188,6 +191,5 @@ class TextBigStyle extends TextStyle {
   double? get fontSize => 20;
 
   @override
-  FontWeight? get fontWeight => FontWeight.w600;
+  FontWeight? get fontWeight => FontWeight.w500;
 }
-

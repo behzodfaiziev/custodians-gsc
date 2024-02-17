@@ -1,5 +1,6 @@
 import 'package:custodians/core/extensions/context_extension.dart';
 import 'package:custodians/features/_main/view/main_view.dart';
+import 'package:custodians/features/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 
 class SignInView extends StatelessWidget {
@@ -7,6 +8,7 @@ class SignInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = AuthController();
     return Scaffold(
         body: Center(
       child: Column(
@@ -43,8 +45,14 @@ class SignInView extends StatelessWidget {
             height: 5,
           ),
           ElevatedButton(
-            onPressed: () {
-              context.pushReplaceAll(const MainView());
+            onPressed: () async {
+              final user = await authController.signInAnonymously();
+              if (user != null && context.mounted) {
+                context.pushReplaceAll(const MainView());
+              } else if (context.mounted && user == null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('An error occurred')));
+              }
             },
             style: ElevatedButton.styleFrom(
               elevation: 5,

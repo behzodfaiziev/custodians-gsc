@@ -1,6 +1,9 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class ReportModel {
   ReportModel({
     this.id,
+    this.userId,
     this.title,
     this.description,
     this.imageUrl,
@@ -15,9 +18,11 @@ class ReportModel {
     this.isEnded,
     this.latitude,
     this.longitude,
+    this.participants,
   });
 
   final String? id;
+  final String? userId;
   final String? title;
   final String? description;
   final String? imageUrl;
@@ -32,10 +37,14 @@ class ReportModel {
   final bool? isEnded;
   final double? latitude;
   final double? longitude;
+  final List<String>? participants;
+
+  LatLng get latLng => LatLng(latitude!, longitude!);
 
   factory ReportModel.fromJson(Map<String, dynamic> json) {
     return ReportModel(
       id: json['id'] as String,
+      userId: json['userId'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
       imageUrl: json['imageUrl'] as String,
@@ -50,12 +59,14 @@ class ReportModel {
       isEnded: json['isEnded'] as bool,
       latitude: json['latitude'] as double,
       longitude: json['longitude'] as double,
+      participants: (json['participants'] as List<dynamic>).cast<String>(),
     );
   }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
+      'userId': userId,
       'title': title,
       'description': description,
       'imageUrl': imageUrl,
@@ -70,6 +81,47 @@ class ReportModel {
       'isEnded': isEnded,
       'latitude': latitude,
       'longitude': longitude,
+      'participants': participants,
     };
+  }
+
+  ReportModel copyWith({
+    String? id,
+    String? userId,
+    String? title,
+    String? description,
+    String? imageUrl,
+    String? location,
+    String? date,
+    String? time,
+    String? status,
+    String? createdBy,
+    String? createdDate,
+    int? requiredPeople,
+    int? currentPeople,
+    bool? isEnded,
+    double? latitude,
+    double? longitude,
+    List<String>? participants,
+  }) {
+    return ReportModel(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
+      location: location ?? this.location,
+      date: date ?? this.date,
+      time: time ?? this.time,
+      status: status ?? this.status,
+      createdBy: createdBy ?? this.createdBy,
+      createdDate: createdDate ?? this.createdDate,
+      requiredPeople: requiredPeople ?? this.requiredPeople,
+      currentPeople: currentPeople ?? this.currentPeople,
+      isEnded: isEnded ?? this.isEnded,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      participants: participants ?? this.participants,
+    );
   }
 }

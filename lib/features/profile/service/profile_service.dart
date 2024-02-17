@@ -1,6 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../../product/models/user/user_model.dart';
 
 class ProfileService {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
   Future<UserModel> getProfile() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return UserModel(

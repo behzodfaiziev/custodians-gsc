@@ -5,7 +5,6 @@ mixin MapsViewMixin on State<MapsView> {
       const CameraPosition(target: LatLng(41.025886, 28.889445), zoom: 17);
 
   void onMapTapped(LatLng latLng) {
-    print('Tapped: $latLng');
   }
 
   Set<Marker> get markers {
@@ -15,12 +14,11 @@ mixin MapsViewMixin on State<MapsView> {
         position: const LatLng(41.025886, 28.889445),
         infoWindow: const InfoWindow(title: 'Marker 1'),
         onTap: () {
-          print('Marker 1 tapped');
         },
       ),
       Marker(
           markerId: const MarkerId('marker_2'),
-          position: LatLng(41.022176698471995, 28.897198252379894),
+          position: const LatLng(41.022176698471995, 28.897198252379894),
           infoWindow: const InfoWindow(title: 'Marker 2'),
           onTap: () {
             context.push(ReportDetailsView(

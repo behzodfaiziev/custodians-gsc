@@ -22,6 +22,19 @@ class LightTheme {
           backgroundColor: AppColors.primaryColor,
         ),
         pageTransitionsTheme: _pageTransitionsTheme,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: AppColors.white,
+            backgroundColor: AppColors.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            textStyle: const TextStyle(
+              fontSize: 16,
+              color: AppColors.white,
+            ),
+          ),
+        ),
       );
 
   PageTransitionsTheme get _pageTransitionsTheme =>

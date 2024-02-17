@@ -23,7 +23,10 @@ class _ProfileViewState extends State<ProfileView> {
         future: _profileController.getProfile(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ProfileBody(user: snapshot.data!);
+            return ProfileBody(
+              user: snapshot.data!,
+              profileController: _profileController,
+            );
           }
 
           if (snapshot.hasError) {
