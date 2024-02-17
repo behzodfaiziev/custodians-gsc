@@ -19,7 +19,7 @@ class ProfileService {
       bio: 'I am a software developer',
       followers: 100,
       following: 50,
-      leaders: ['İzzettin Karayasar', 'Celal Yeldus', 'Mehmet Yıldız'],
+      leaders: ['İzzettin Karasayar', 'Celal Yeldus', 'Mehmet Yıldız'],
       organizedEvents: 10,
       participatedEvents: 20,
       ranking: '12/200',

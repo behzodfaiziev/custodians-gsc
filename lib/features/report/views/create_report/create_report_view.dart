@@ -29,7 +29,7 @@ class _CreateReportViewState extends State<CreateReportView>
     return Scaffold(
       appBar: const BaseAppBar(title: 'New Report'),
       body: isLoading
-          ? const CircularProgressIndicator.adaptive()
+          ? const Center(child: CircularProgressIndicator.adaptive())
           : ListView(
               children: [
                 Padding(

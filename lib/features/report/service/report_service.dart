@@ -9,13 +9,14 @@ import '../../../product/models/report/report_model.dart';
 class ReportService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final User? _currentUser = FirebaseAuth.instance.currentUser;
-final FirebaseStorage _storage = FirebaseStorage.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
+
   Future<bool> createReport(ReportModel report) async {
     try {
       if (_currentUser == null) return false;
       final DocumentReference docRef = _firestore.collection('reports').doc();
 
-     final newReport =  report.copyWith(
+      final newReport = report.copyWith(
         id: docRef.id,
         userId: _currentUser!.uid,
       );
@@ -28,8 +29,11 @@ final FirebaseStorage _storage = FirebaseStorage.instance;
   }
 
   Future<String> uploadImage(File file) async {
-   final result = await _storage.ref().child('images').putFile(file);
-   return result.ref.getDownloadURL();
+    final result = await _storage
+        .ref()
+        .child('image_${DateTime.now().millisecondsSinceEpoch}')
+        .putFile(file);
+    return result.ref.getDownloadURL();
   }
 
   Future<bool> participateReport(ReportModel report) async {
