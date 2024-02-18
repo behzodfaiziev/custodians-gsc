@@ -1,6 +1,5 @@
 import 'package:custodians/features/report/views/report_details/report_details_view.dart';
 import 'package:custodians/product/components/report_tile/report_tile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../product/models/report/report_model.dart';
@@ -18,15 +17,11 @@ class _SearchViewState extends State<SearchView> {
   List _resultList = [];
 
   final TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
 
   @override
   void initState() {
-    _searchController.addListener(_onSearchChanged);
     super.initState();
-  }
-
-  _onSearchChanged() {
-    searchResultList();
   }
 
   getClientStream() async {
@@ -58,7 +53,6 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   void dispose() {
-    _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
     super.dispose();
   }
@@ -69,22 +63,71 @@ class _SearchViewState extends State<SearchView> {
     super.didChangeDependencies();
   }
 
+  void _toggleSearch() {
+    setState(() {
+      _isSearching = !_isSearching;
+      if (!_isSearching) {
+        _searchController.clear();
+        searchResultList();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: CupertinoSearchTextField(
-          controller: _searchController,
+        backgroundColor: const Color(0xFF54B532),
+        titleSpacing: 0,
+        title: Row(
+          children: [
+            IconButton(
+              onPressed: () {
+                _toggleSearch();
+              },
+              icon: const Icon(Icons.search, color: Colors.white),
+            ),
+            if (_isSearching)
+              Expanded(
+                child: Row(
+                  children: [
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        controller: _searchController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Search',
+                          hintStyle: TextStyle(color: Colors.white),
+                        ),
+                        style: const TextStyle(color: Colors.white),
+                        onChanged: (value) => searchResultList(),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        // Handle cancel button press
+                        _searchController.clear();
+                        searchResultList();
+                        _toggleSearch(); // Toggle search to close it
+                      },
+                      icon: const Icon(Icons.clear, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+          ],
         ),
       ),
       body: ListView.builder(
         itemCount: _resultList.length,
         itemBuilder: (context, index) {
+          // Use the ReportTile widget here
           final report = ReportModel.fromJson(_resultList[index].data() as Map<String, dynamic>);
           return ReportTile(
             report: report,
             onTap: () {
+              // Handle onTap if needed
               context.push(ReportDetailsView(report: report));
             },
           );
