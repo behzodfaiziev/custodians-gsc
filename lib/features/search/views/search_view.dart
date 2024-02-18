@@ -1,7 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:custodians/features/report/views/report_details/report_details_view.dart';
+import 'package:custodians/product/components/report_tile/report_tile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../../product/models/report/report_model.dart';
+import 'package:custodians/core/extensions/context_extension.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -35,8 +38,7 @@ class _SearchViewState extends State<SearchView> {
     setState(() {
       _allResults = data.docs;
     });
-        searchResultList();
-
+    searchResultList();
   }
 
   searchResultList() {
@@ -48,7 +50,7 @@ class _SearchViewState extends State<SearchView> {
           showResult.add(clientSnapShot);
         }
       }
-    } 
+    }
     setState(() {
       _resultList = showResult;
     });
@@ -71,23 +73,20 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: CupertinoSearchTextField(
-            controller: _searchController,
-          )),
+        backgroundColor: Colors.white,
+        title: CupertinoSearchTextField(
+          controller: _searchController,
+        ),
+      ),
       body: ListView.builder(
         itemCount: _resultList.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(
-              _resultList[index]['title'],
-            ),
-            subtitle: Text(
-              _resultList[index]['date'],
-            ),
-            trailing: Text(
-              _resultList[index]['location'],
-            ),
+          final report = ReportModel.fromJson(_resultList[index].data() as Map<String, dynamic>);
+          return ReportTile(
+            report: report,
+            onTap: () {
+              context.push(ReportDetailsView(report: report));
+            },
           );
         },
       ),
