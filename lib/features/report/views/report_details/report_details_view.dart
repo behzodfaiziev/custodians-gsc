@@ -130,6 +130,72 @@ class _ReportDetailsViewState extends State<ReportDetailsView> {
                   ),
                 ),
                 Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                    child: Container(
+                      height: 40,
+                      color: Colors.green,
+                      child: const Padding(
+                        padding: EdgeInsets.fromLTRB(15, 9, 5, 5),
+                        child: Text("Chat",style: TextStyle(fontSize: 18),),
+                      ),
+                    )
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(15, 9, 9, 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("   İzzettin Karasayar",style: TextSmallStyle(),),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: const BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.all(Radius.circular(15))
+                              ),
+                            child: const Text("So we have enough trash bags, right?",style: TextStyle(fontSize: 14),),
+                          ),
+                          SizedBox(height: 10,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text("   Celal Yeldus   ",style: TextSmallStyle(),),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: const BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.all(Radius.circular(15))
+                                ),
+                                child: const Text("Yes, I will get them.",style: TextStyle(fontSize: 14),),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ),
+                  ),
+                ),
+                Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ElevatedButton(
                     onPressed: () async {
