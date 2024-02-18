@@ -1,8 +1,8 @@
 part of 'create_report_view.dart';
 
 mixin CreateReportViewMixin on State<CreateReportView> {
-  final CreateReportController _createReportController =
-      CreateReportController();
+  final ReportController _createReportController =
+      ReportController();
 
   Set<Marker> selectedMarker = <Marker>{};
   XFile? image;

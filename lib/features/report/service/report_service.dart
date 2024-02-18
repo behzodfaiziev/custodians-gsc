@@ -36,7 +36,7 @@ class ReportService {
     return result.ref.getDownloadURL();
   }
 
-  Future<bool> participateReport(ReportModel report) async {
+  Future<bool> participateInEvent(ReportModel report) async {
     try {
       if (_currentUser == null) return false;
       final DocumentReference reportDocRef =
@@ -46,9 +46,12 @@ class ReportService {
       if (!reportSnapshot.exists) return false;
 
       final List<dynamic> participants = reportSnapshot.get('participants');
+      int currentPeople = reportSnapshot.get('currentPeople');
+      currentPeople++;
       participants.add(_currentUser!.uid);
 
-      await reportDocRef.update({'participants': participants});
+      await reportDocRef.update(
+          {'participants': participants, 'currentPeople': currentPeople});
 
       // Get the user's document reference
       final DocumentReference userDocRef =

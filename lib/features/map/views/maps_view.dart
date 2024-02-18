@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/widgets/app_bar/base_app_bar.dart';
 import '../../../product/components/maps/app_maps.dart';
+import '../controller/map_controller.dart';
 
 part 'maps_view_mixin.dart';
 
@@ -22,7 +23,7 @@ class _MapsViewState extends State<MapsView> with MapsViewMixin {
     return Scaffold(
         appBar: const BaseAppBar(title: 'Find nearby events'),
         body: AppMaps(
-          markers: generatedMarkers,
+          markers: markers,
           onMapTapped: onMapTapped,
         ));
   }

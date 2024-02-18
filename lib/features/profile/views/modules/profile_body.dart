@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../product/models/user/user_model.dart';
 import '../../../auth/views/auth_checker.dart';
 import '../../controller/profile_controller.dart';
+import '../participated_events/participated_events_view.dart';
 
 class ProfileBody extends StatelessWidget {
   const ProfileBody(
@@ -82,7 +83,9 @@ class ProfileBody extends StatelessWidget {
                 style: TextSmallStyle(),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  context.push(const ParticipatedEventsView());
+                },
                 child: Container(
                   color: ThemeData.light().canvasColor,
                   child: Row(
@@ -112,7 +115,14 @@ class ProfileBody extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('This feature is under development'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
                 child: Container(
                   color: ThemeData.light().canvasColor,
                   child: Row(

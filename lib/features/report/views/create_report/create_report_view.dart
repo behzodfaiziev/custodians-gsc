@@ -11,7 +11,7 @@ import '../../../../product/components/maps/app_maps.dart';
 import '../../../../product/components/picker/file_picker_button.dart';
 import '../../../../product/models/report/report_model.dart';
 import '../../../_main/view/main_view.dart';
-import '../../controller/create_report_controller.dart';
+import '../../controller/report_controller.dart';
 
 part 'create_report_view_mixin.dart';
 

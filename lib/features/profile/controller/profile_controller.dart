@@ -1,3 +1,4 @@
+import '../../../product/models/report/report_model.dart';
 import '../../../product/models/user/user_model.dart';
 import '../service/profile_service.dart';
 
@@ -10,5 +11,9 @@ class ProfileController {
 
   Future<void> signOut() async {
     return _profileService.signOut();
+  }
+
+  Future<List<ReportModel>> getParticipatedEvents() async {
+    return await _profileService.getParticipatedEvents();
   }
 }
