@@ -106,10 +106,9 @@ class _SearchViewState extends State<SearchView> {
                     ),
                     IconButton(
                       onPressed: () {
-                        // Handle cancel button press
                         _searchController.clear();
                         searchResultList();
-                        _toggleSearch(); // Toggle search to close it
+                        _toggleSearch(); 
                       },
                       icon: const Icon(Icons.clear, color: Colors.white),
                     ),
@@ -122,12 +121,10 @@ class _SearchViewState extends State<SearchView> {
       body: ListView.builder(
         itemCount: _resultList.length,
         itemBuilder: (context, index) {
-          // Use the ReportTile widget here
           final report = ReportModel.fromJson(_resultList[index].data() as Map<String, dynamic>);
           return ReportTile(
             report: report,
             onTap: () {
-              // Handle onTap if needed
               context.push(ReportDetailsView(report: report));
             },
           );
