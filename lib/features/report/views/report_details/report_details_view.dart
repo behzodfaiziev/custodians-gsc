@@ -216,7 +216,7 @@ class _ReportDetailsViewState extends State<ReportDetailsView> {
                       } else if (isSuccess == false && context.mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text("Failed to join the event"),
+                            content: Text("You have joined the event"),            
                           ),
                         );
                       }

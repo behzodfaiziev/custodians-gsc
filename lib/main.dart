@@ -1,5 +1,5 @@
 import 'package:custodians/product/init/theme/light_theme.dart';
-import 'package:firebase_core/firebase_core.dart';
+import irebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'features/auth/views/auth_checker.dart';
